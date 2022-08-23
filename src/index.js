@@ -5,16 +5,36 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Homepage from './features/components/Homepage'
+import AddUser from './features/components/AddUser';
+import Edituser from './features/components/Edituser';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import UserData from './features/components/userData';
+import Post from './features/components/post';
+
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <>
     <Provider store={store}>
-      <App />
+      <Router>
+        <Routes>
+          <Route path='/' element={<Homepage />} />
+          <Route path='/addUser' element={<AddUser />} />
+          <Route path='/editUser/:id' element={<Edituser />} />
+          <Route path='/userData/:id' element={<UserData/>}/>
+          <Route path='userPost/:id' element={<Post/>}/>
+        </Routes>
+      </Router>
     </Provider>
-  </React.StrictMode>
+    <ToastContainer />
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function
